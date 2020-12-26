@@ -1,0 +1,10 @@
+[
+  {
+    "py/object": "model.project.Project",
+    "name": "ProjecteH",
+    "status": "stable",
+    "view": "private",
+    "description": "description",
+    "id": null
+  }
+]
