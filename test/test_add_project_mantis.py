@@ -1,14 +1,12 @@
 from model.project import Project
 
 
-def test_add_project(app, db):
+def test_add_project(app, db, json_project):
     app.session.login(username="administrator", password="root")
-    project = Project(name="New project", description="Project description", status="development", view="public")
-    old_projects_list = db.get_projects_list()
-    app.session.login(username="administrator", password="root")
-    app.project.create(project)
-    app.session.logout()
-    new_projects_list = db.get_projects_list()
+    old_projects_list = app.soap.get_list_project(username="administrator", password="root")
+    app.project.create(json_project)
+    new_projects_list = app.soap.get_list_project(username="administrator", password="root")
+    assert len(old_projects_list) == len(new_projects_list)
     assert sorted(old_projects_list, key=Project.id_or_max) == sorted(new_projects_list, key=Project.id_or_max)
 
 
